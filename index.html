@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup Page</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+          background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);           font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+          background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.03);
+        }
+
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #0000ff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #9101ff;
+        }
+
+        .login_form .error,
+        .signup_form .error {
+            margin-top: 5px;
+            width: 345px;
+            font-size: 18px;
+            color: #d32f2f;
+            background: rgba(255, 0, 0, 0.1);
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #e57373;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" class="login_form" onsubmit="return validateLogin()">
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <div class="error" id="loginEmailError">Please fill up your Email or Phone</div>
+
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <div class="error" id="loginPassError">Please fill up your Password</div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>or</p>
+
+        <h2>Signup</h2>
+        <form id="signupForm" class="signup_form" onsubmit="return validateSignup()">
+            <input type="text" id="signupUsername" placeholder="Username" required>
+            <div class="error" id="signupEmailError">Please fill up your Email or Phone</div>
+
+            <input type="password" id="signupPassword" placeholder="Password" required>
+            <div class="error" id="signupPassError">Please fill up your Password</div>
+
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to validate login inputs
+        function validateLogin() {
+            var isValid = true;
+
+            var loginUsername = document.getElementById("loginUsername");
+            var loginPassword = document.getElementById("loginPassword");
+            var loginEmailError = document.getElementById("loginEmailError");
+            var loginPassError = document.getElementById("loginPassError");
+
+            // Check if username is empty
+            if (loginUsername.value.trim() === "") {
+                loginUsername.style.border = "1px solid red";
+                loginEmailError.style.display = "block";
+                isValid = false;
+            } else {
+                loginUsername.style.border = "1px solid silver";
+                loginEmailError.style.display = "none";
+            }
+
+            // Check if password is empty
+            if (loginPassword.value.trim() === "") {
+                loginPassword.style.border = "1px solid red";
+                loginPassError.style.display = "block";
+                isValid = false;
+            } else {
+                loginPassword.style.border = "1px solid silver";
+                loginPassError.style.display = "none";
+            }
+
+            return isValid;
+        }
+
+        // Function to validate signup inputs
+        function validateSignup() {
+            var isValid = true;
+
+            var signupUsername = document.getElementById("signupUsername");
+            var signupPassword = document.getElementById("signupPassword");
+            var signupEmailError = document.getElementById("signupEmailError");
+            var signupPassError = document.getElementById("signupPassError");
+
+            // Check if username is empty or too long
+            if (signupUsername.value.trim() === "") {
+                signupUsername.style.border = "1px solid red";
+                signupEmailError.style.display = "block";
+                isValid = false;
+            } else if (signupUsername.value.length > 20) {
+                signupUsername.style.border = "1px solid red";
+                signupEmailError.style.display = "block";
+                signupEmailError.innerHTML = "Username should be less than 20 characters";
+                isValid = false;
+            } else {
+                signupUsername.style.border = "1px solid silver";
+                signupEmailError.style.display = "none";
+            }
+
+            // Check if password is empty or too long
+            if (signupPassword.value.trim() === "") {
+                signupPassword.style.border = "1px solid red";
+                signupPassError.style.display = "block";
+                isValid = false;
+            } else if (signupPassword.value.length > 10) {
+                signupPassword.style.border = "1px solid red";
+                signupPassError.style.display = "block";
+                signupPassError.innerHTML = "Password should be less than 10 characters";
+                isValid = false;
+            } else {
+                signupPassword.style.border = "1px solid silver";
+                signupPassError.style.display = "none";
+            }
+
+            return isValid;
+        }
+    </script>
+
+</body>
+</html>
